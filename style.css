@@ -5,12 +5,10 @@
     outline: 2px solid lime;
 } */
 body {
-    background-color: #ffffff;
-    background-image: url("https://www.transparenttextures.com/patterns/padded.png");
+    background-image: radial-gradient(circle at center, #f0f4ff, #d4e0f5, #b4c9e4);
     min-height: 100vh;
     width: 100vw;
     overflow-x: hidden;
-    background-blend-mode: normal;
   }
   
   .navbar-nav {
