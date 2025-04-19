@@ -130,4 +130,30 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+
+  // ✅ Swipe gesture support for modal (touch devices)
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  modalImage.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  modalImage.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipeGesture();
+  });
+
+  function handleSwipeGesture() {
+    const swipeThreshold = 50; // px
+    const swipeDistance = touchEndX - touchStartX;
+
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+      if (swipeDistance < 0) {
+        nextBtn.click(); // Swiped left
+      } else {
+        prevBtn.click(); // Swiped right
+      }
+    }
+  }
 });
