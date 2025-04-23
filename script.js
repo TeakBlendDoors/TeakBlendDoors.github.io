@@ -131,39 +131,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 👇 Smart touch handling inside modal
-  let isModalOpen = false;
-  let startY = 0;
+  // ✅ SWIPE SUPPORT for modal
+  let touchStartX = 0;
+  let touchEndX = 0;
 
-  imageModal.addEventListener('show.bs.modal', () => {
-    isModalOpen = true;
+  modalImage.addEventListener('touchstart', function (e) {
+    if (e.touches.length === 1) {
+      touchStartX = e.touches[0].clientX;
+    }
   });
 
-  imageModal.addEventListener('hidden.bs.modal', () => {
-    isModalOpen = false;
+  modalImage.addEventListener('touchend', function (e) {
+    if (e.changedTouches.length === 1) {
+      touchEndX = e.changedTouches[0].clientX;
+      handleSwipeGesture();
+    }
   });
 
-  imageModal.addEventListener('touchstart', function (e) {
-    if (!isModalOpen) return;
+  function handleSwipeGesture() {
+    const deltaX = touchEndX - touchStartX;
+    const threshold = 50;
 
-    if (e.touches.length === 1) {
-      startY = e.touches[0].clientY;
+    if (deltaX > threshold) {
+      prevBtn.click(); // swipe right
+    } else if (deltaX < -threshold) {
+      nextBtn.click(); // swipe left
     }
-  }, { passive: false });
-
-  imageModal.addEventListener('touchmove', function (e) {
-    if (!isModalOpen) return;
-
-    if (e.touches.length === 1) {
-      const currentY = e.touches[0].clientY;
-      const deltaY = Math.abs(currentY - startY);
-
-      if (deltaY > 10) {
-        // Prevent vertical scroll while allowing horizontal swipe
-        e.preventDefault();
-      }
-    }
-    // Multi-touch (pinch): do nothing, allow zoom
-  }, { passive: false });
-
+  }
 });
