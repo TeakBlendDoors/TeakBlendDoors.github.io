@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modalImage.onerror = () => {
       modalImage.src = 'fallback.webp';
     };
-    modalImage.src = `https://ik.imagekit.io/KrishnanDoors/${serial}.webp`;
+    modalImage.src = `https://ik.imagekit.io/TeakBlendDoors/${serial}.webp`;
     history.replaceState(null, '', `#${serial}`);
   }
 
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
       img.dataset.bsTarget = '#imageModal';
       img.dataset.index = index;
       img.onerror = () => { img.src = 'fallback.webp'; };
-      img.src = `https://ik.imagekit.io/KrishnanDoors/${serial}.webp`;
+      img.src = `https://ik.imagekit.io/TeakBlendDoors/${serial}.webp`;
 
       if (index >= firstRowCount) {
         img.loading = 'lazy';
