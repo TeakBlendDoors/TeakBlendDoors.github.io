@@ -4,20 +4,36 @@
     box-sizing: border-box;
     outline: 2px solid lime;
 } */
-body {
-    background-image: radial-gradient(circle at center, #f0f4ff, #d4e0f5, #b4c9e4);
+  body {
     min-height: 100vh;
     width: 100vw;
     overflow-x: hidden;
+    background: linear-gradient(90deg, #b48c55,#daba8e,#e1c493,#e4ba88,#e1c493,#daba8e,#b48c55), url(egg-shell.png);
+    background-blend-mode: overlay;
+    background-repeat: repeat; 
+    background-size: cover auto;
+  }  
+  .navbar{
+    padding-block: 0px !important;
   }
-  
+  .navbar-toggler{
+    padding-block: 0px !important;
+  }
+  .navbar-brand{
+    padding-block: 0px !important;
+  }
+  .nav-link{
+    padding-block: 14px !important;
+    padding-inline: 16px !important;
+    margin: 0px !important;
+  }
   .navbar-nav {
     margin-left: auto;
   }
   
   .navbar {
     padding-inline: 2vw;
-    background: white;
+    background: #ffffff;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, 
                 rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
     font-family: sans-serif;
@@ -94,14 +110,13 @@ body {
     overflow: hidden !important; 
     transition: transform 0.3s ease, box-shadow 0.3s ease-in-out;
     position: relative;
-    z-index: 1;    
+    z-index: 1; 
   }
   .rounded:hover, .rounded:focus {
     outline: none;
     transform: translateY(-9px);
     will-change: transform, box-shadow;
     transition: all 0.3s ease-in-out;
-    /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
   }
   .rounded img {
@@ -237,7 +252,7 @@ body {
   z-index: 1000;
   transform: translateY(-50%);
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: 100vw;
   user-select: none;
 }
 
