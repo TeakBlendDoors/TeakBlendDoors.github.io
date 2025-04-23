@@ -131,8 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 👇 Enable pinch zoom only when modal is open
+  // 👇 Smart touch handling inside modal
   let isModalOpen = false;
+  let startY = 0;
 
   imageModal.addEventListener('show.bs.modal', () => {
     isModalOpen = true;
@@ -143,15 +144,26 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   imageModal.addEventListener('touchstart', function (e) {
-    if (isModalOpen && e.touches.length > 1) {
-      return; // Allow pinch zoom
+    if (!isModalOpen) return;
+
+    if (e.touches.length === 1) {
+      startY = e.touches[0].clientY;
     }
   }, { passive: false });
 
   imageModal.addEventListener('touchmove', function (e) {
-    if (isModalOpen && e.touches.length > 1) {
-      return; // Allow pinch zoom
+    if (!isModalOpen) return;
+
+    if (e.touches.length === 1) {
+      const currentY = e.touches[0].clientY;
+      const deltaY = Math.abs(currentY - startY);
+
+      if (deltaY > 10) {
+        // Prevent vertical scroll while allowing horizontal swipe
+        e.preventDefault();
+      }
     }
+    // Multi-touch (pinch): do nothing, allow zoom
   }, { passive: false });
 
 });
