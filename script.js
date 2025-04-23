@@ -130,32 +130,4 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
-
-  // ✅ SWIPE SUPPORT for modal
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  modalImage.addEventListener('touchstart', function (e) {
-    if (e.touches.length === 1) {
-      touchStartX = e.touches[0].clientX;
-    }
-  });
-
-  modalImage.addEventListener('touchend', function (e) {
-    if (e.changedTouches.length === 1) {
-      touchEndX = e.changedTouches[0].clientX;
-      handleSwipeGesture();
-    }
-  });
-
-  function handleSwipeGesture() {
-    const deltaX = touchEndX - touchStartX;
-    const threshold = 50;
-
-    if (deltaX > threshold) {
-      prevBtn.click(); // swipe right
-    } else if (deltaX < -threshold) {
-      nextBtn.click(); // swipe left
-    }
-  }
 });
