@@ -131,29 +131,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // ✅ Swipe gesture support for modal (touch devices)
-  let touchStartX = 0;
-  let touchEndX = 0;
+  // 👇 Enable pinch zoom only when modal is open
+  let isModalOpen = false;
 
-  modalImage.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
+  imageModal.addEventListener('show.bs.modal', () => {
+    isModalOpen = true;
   });
 
-  modalImage.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipeGesture();
+  imageModal.addEventListener('hidden.bs.modal', () => {
+    isModalOpen = false;
   });
 
-  function handleSwipeGesture() {
-    const swipeThreshold = 50; // px
-    const swipeDistance = touchEndX - touchStartX;
-
-    if (Math.abs(swipeDistance) > swipeThreshold) {
-      if (swipeDistance < 0) {
-        nextBtn.click(); // Swiped left
-      } else {
-        prevBtn.click(); // Swiped right
-      }
+  imageModal.addEventListener('touchstart', function (e) {
+    if (isModalOpen && e.touches.length > 1) {
+      return; // Allow pinch zoom
     }
-  }
+  }, { passive: false });
+
+  imageModal.addEventListener('touchmove', function (e) {
+    if (isModalOpen && e.touches.length > 1) {
+      return; // Allow pinch zoom
+    }
+  }, { passive: false });
+
 });
