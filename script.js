@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     filteredSerials.forEach((serial, index) => {
       const col = document.createElement('div');
-      col.className = 'img-container col-12 col-sm-6 col-md-4 col-lg-3 mb-4';
+      col.className = 'img-container col-12 col-sm-6 col-md-4 col-lg-3 mb-4 block';
 
       const wrapper = document.createElement('div');
       wrapper.classList.add('rounded');
@@ -109,6 +109,25 @@ document.addEventListener('DOMContentLoaded', () => {
       col.appendChild(wrapper);
       gallery.appendChild(col);
     });
+
+    observeBlocks(); // Re-attach animation observer to new blocks
+  }
+
+  function observeBlocks() {
+    const blocks = document.querySelectorAll('.block');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    blocks.forEach(block => observer.observe(block));
   }
 
   updateGallery(serials);
